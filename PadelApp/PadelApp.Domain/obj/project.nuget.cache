@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "uyA5O1NORzIp/2ZhsL8bx9DMjKxDaG5OgDsmMT6EjrTyf6jlDcsfUeO6DM7RqDcavgyC16ElRjoZtk2ii26k8w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\padelApp-back\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\balsa\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\balsa\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\balsa\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

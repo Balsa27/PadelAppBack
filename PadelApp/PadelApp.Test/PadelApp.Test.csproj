@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PadelApp.Application\PadelApp.Application.csproj" />
+      <ProjectReference Include="..\PadelApp.Domain\PadelApp.Domain.csproj" />
+      <ProjectReference Include="..\PadelApp.Infrastructure\PadelApp.Infrastructure.csproj" />
+      <ProjectReference Include="..\PadelApp.Persistance\PadelApp.Persistance.csproj" />
+      <ProjectReference Include="..\PadelApp.Presentation\PadelApp.Presentation.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+      <PackageReference Include="Moq" Version="4.20.69" />
+      <PackageReference Include="xunit" Version="2.5.0" />
+    </ItemGroup>
+
+
+</Project>

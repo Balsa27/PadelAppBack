@@ -1,0 +1,17 @@
+﻿version: '3.8'
+
+services:
+  padelapp:
+    image: padelapp:latest
+    build:
+      context: .
+      dockerfile: PadelApp/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - padelnet
+
+networks:
+  padelnet:
+    driver: bridge

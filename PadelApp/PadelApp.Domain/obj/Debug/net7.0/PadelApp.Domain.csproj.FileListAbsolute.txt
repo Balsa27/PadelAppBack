@@ -1,0 +1,12 @@
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\bin\Debug\net7.0\PadelApp.Domain.deps.json
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\bin\Debug\net7.0\PadelApp.Domain.dll
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\bin\Debug\net7.0\PadelApp.Domain.pdb
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\PadelApp.Domain.csproj.AssemblyReference.cache
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\PadelApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\PadelApp.Domain.AssemblyInfoInputs.cache
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\PadelApp.Domain.AssemblyInfo.cs
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\PadelApp.Domain.csproj.CoreCompileInputs.cache
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\PadelApp.Domain.dll
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\refint\PadelApp.Domain.dll
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\PadelApp.Domain.pdb
+C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.Domain\obj\Debug\net7.0\ref\PadelApp.Domain.dll
