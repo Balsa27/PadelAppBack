@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.DROPLET_USER }}
         key: ${{ secrets.DROPLET_SSH_KEY }}
         script: |
-          cd /root/Project/PaddelAppBack
+          cd /root/Project/PaddelAppBack/PadelApp
           git pull origin master
           docker build -t padelapp:latest .
           docker stop padelapp-padelapp-1 || true
