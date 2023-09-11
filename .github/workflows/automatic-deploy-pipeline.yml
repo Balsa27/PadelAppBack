@@ -20,9 +20,7 @@ jobs:
         username: ${{ secrets.DROPLET_USER }}
         key: ${{ secrets.DROPLET_SSH_KEY }}
         script: |
+          set -e  
           cd /root/Project/PaddelAppBack/PadelApp/PadelApp
-          git pull origin main
-          docker build -t padelapp:latest .
-          docker stop padelapp-padelapp-1 || true
-          docker rm padelapp-padelapp-1 || true
-          docker run --name your_container_name -d -p 80:80 padelapp:latest
+          docker-compose down
+          docker-compose up -d --build
