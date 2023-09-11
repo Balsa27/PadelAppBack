@@ -118,11 +118,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\balsa\\OneDrive\\Radna površina\\padelApp-back\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj",
       "projectName": "PadelApp.Domain",
-      "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\padelApp-back\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj",
+      "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj",
       "packagesPath": "C:\\Users\\balsa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\padelApp-back\\PadelApp\\PadelApp.Domain\\obj\\",
+      "outputPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\balsa\\AppData\\Roaming\\NuGet\\NuGet.Config"

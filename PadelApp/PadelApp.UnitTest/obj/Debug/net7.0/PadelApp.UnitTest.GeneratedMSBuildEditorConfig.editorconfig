@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PadelApp.UnitTest
-build_property.ProjectDir = C:\Users\balsa\OneDrive\Radna površina\padelApp-back\PadelApp\PadelApp.UnitTest\
+build_property.ProjectDir = C:\Users\balsa\OneDrive\Radna površina\PaddelAppBack\PadelApp\PadelApp.UnitTest\
