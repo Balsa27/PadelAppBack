@@ -32,4 +32,10 @@ public class PlayerController : ControllerBase
         
         return Ok(new { result.Value });
     }
+    
+    [HttpGet("test")]
+    public async Task<IActionResult> Register(CancellationToken cancellationToken)
+    {
+        return Ok(new { result = "test" });
+    }
 }
