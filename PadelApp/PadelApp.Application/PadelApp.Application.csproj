@@ -17,14 +17,7 @@
       <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
       <PackageReference Include="MediatR" Version="12.1.1" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.10" />
-    </ItemGroup>
-
-
-
-
-    <ItemGroup>
-      <Folder Include="Commands\" />
-      <Folder Include="Queries\" />
+      <PackageReference Include="Quartz" Version="3.7.0" />
     </ItemGroup>
 
 </Project>

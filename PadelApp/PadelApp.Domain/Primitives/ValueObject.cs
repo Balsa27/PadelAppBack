@@ -1,7 +1,7 @@
 ﻿namespace PadelApp.Domain.Primitives;
 public abstract class ValueObject : IEquatable<ValueObject>
 {
-    protected abstract IEnumerable<object> GetAtomicValues(); 
+    protected abstract IEnumerable<object?> GetAtomicValues(); 
     
     //returns true if the atomic values if both of the value objs are the same while respecting the order of values of GetAtomicValues()
     private bool ValuesAreEqual(ValueObject obj) =>GetAtomicValues().SequenceEqual(obj.GetAtomicValues());

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "9snQF4ykbUuGtX1izZBlN2uiK/3qaiKKces2ARdYOJNV5TymD8tq/sQdApmZBe2tScUgcvIWgvx4AylNAGi/tA==",
+  "dgSpecHash": "AZAPKQPJ1zOiaGw58JAOG42YVN8JwlyFOczEyple7gtm/50++e5iEIx2OQBMQ0QP7YlHsp6rA06E5N3qAHM8ew==",
   "success": true,
   "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\balsa\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\balsa\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
-    "C:\\Users\\balsa\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+    "C:\\Users\\balsa\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\balsa\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

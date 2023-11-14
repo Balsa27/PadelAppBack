@@ -2,13 +2,8 @@
 public abstract class Entity : IEquatable<Entity>
 {
     //init - value set once when the object is initialized
-    public Guid Id { get; init; }
+    public Guid Id { get; init; } = Guid.NewGuid();
 
-    protected Entity()
-    {
-        Id = Guid.NewGuid();    
-    }
-            
     public static bool operator ==(Entity? first, Entity? second)
     {
         return first is not null && second is not null && first.Equals(second); //Object Equals method used

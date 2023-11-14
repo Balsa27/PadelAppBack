@@ -31,5 +31,13 @@ public class PlayerEntityTypeConfiguration : IEntityTypeConfiguration<Player>
         builder.Property(p => p.Role)
             .HasConversion<int>() 
             .IsRequired();
+        
+        builder.Property(p => p.GoogleId)
+            .HasMaxLength(100)
+            .IsRequired(false);  // Make it optional if not all users will have Google IDs
+
+        builder.Property(p => p.AppleId)
+            .HasMaxLength(100)
+            .IsRequired(false);
     }
 }

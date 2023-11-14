@@ -10,4 +10,6 @@ public interface IPlayerRepository
     Task<Player?> GetByEmail(string email);
     Task<Player?> GetByUsernameOrEmail(string username, string email);
     Task AddAsync(Player player);
+    Task<Player?> GetByGoogleId(string googleId);
+    Task<Player?> GetByAppleId(string appleId);
 }

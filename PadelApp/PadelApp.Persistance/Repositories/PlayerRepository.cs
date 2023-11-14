@@ -19,13 +19,15 @@ public class PlayerRepository : IPlayerRepository
         _dbContext = dbContext;
     }
 
-    public Task<Player?> GetById(Guid guid)
-        => _dbContext.Players
+    public async Task<Player?> GetById(Guid guid)
+        => await _dbContext.Players
             .AsNoTracking()
             .FirstOrDefaultAsync(p => p.Id == guid);
 
     public async Task<Player?> GetByUsername(string username)
-        => await _dbContext.Players.FirstOrDefaultAsync(p => p.Username == username);
+        => await _dbContext
+            .Players
+            .FirstOrDefaultAsync(p => p.Username == username);
 
     public async Task<Player?> GetByEmail(string email)
         => await _dbContext.Players.FirstOrDefaultAsync(p => p.Email == email);
@@ -35,5 +37,11 @@ public class PlayerRepository : IPlayerRepository
 
     public async Task AddAsync(Player player) 
         => await _dbContext.Players.AddAsync(player);
+    
+    public async Task<Player?> GetByGoogleId(string googleId) 
+        => await _dbContext.Players.FirstOrDefaultAsync(p => p.GoogleId == googleId);
+    
+    public async Task<Player?> GetByAppleId(string appleId)
+        => await _dbContext.Players.FirstOrDefaultAsync(p => p.AppleId == appleId);
     
 }

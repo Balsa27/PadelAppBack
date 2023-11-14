@@ -34,11 +34,11 @@ public class PlayerRegisterRequestHandler : IRequestHandler<PlayerRegisterComman
         string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
         var player = new Player(request.Username, hashedPassword, request.Email);
-        
+
         await _playerRepository.AddAsync(player);
-
+        
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-
+        
         var token = _jwtProvider.GeneratePlayerToken(player);
 
         return Result<string>.Success(token);

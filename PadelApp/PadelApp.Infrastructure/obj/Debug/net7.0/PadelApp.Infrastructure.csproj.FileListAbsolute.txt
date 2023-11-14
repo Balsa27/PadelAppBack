@@ -32,3 +32,5 @@ C:\Users\balsa\OneDrive\Radna površina\PaddelAppBack\PadelApp\PadelApp.Infrastr
 C:\Users\balsa\OneDrive\Radna površina\PaddelAppBack\PadelApp\PadelApp.Infrastructure\obj\Debug\net7.0\refint\PadelApp.Infrastructure.dll
 C:\Users\balsa\OneDrive\Radna površina\PaddelAppBack\PadelApp\PadelApp.Infrastructure\obj\Debug\net7.0\PadelApp.Infrastructure.pdb
 C:\Users\balsa\OneDrive\Radna površina\PaddelAppBack\PadelApp\PadelApp.Infrastructure\obj\Debug\net7.0\ref\PadelApp.Infrastructure.dll
+C:\Users\balsa\OneDrive\Radna površina\PaddelAppBack\PadelApp\PadelApp.Infrastructure\bin\Debug\net7.0\PadelApp.Persistance.dll
+C:\Users\balsa\OneDrive\Radna površina\PaddelAppBack\PadelApp\PadelApp.Infrastructure\bin\Debug\net7.0\PadelApp.Persistance.pdb
