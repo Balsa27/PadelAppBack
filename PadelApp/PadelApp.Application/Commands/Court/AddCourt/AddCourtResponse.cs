@@ -1,12 +1,17 @@
-﻿using PadelApp.Domain.ValueObjects;
+﻿using PadelApp.Domain.Enums;
+using PadelApp.Domain.ValueObjects;
 
 namespace PadelApp.Application.Commands.Court.AddCourt;
 
 public record AddCourtResponse(
     Guid CourtId,
+    Guid OrganizationId,
     string Name,
     string Description,
     Address Address,
-    DateTime WorkStartTime,
-    DateTime WorkEndTime, 
-    List<Price> Prices);
+    TimeSpan WorkStartTime,
+    TimeSpan WorkEndTime,
+    List<Price> Prices,
+    string? imageUrl,
+    List<string>? courtImages,
+    CourtStatus Status);

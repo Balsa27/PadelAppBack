@@ -1,3 +1,11 @@
-﻿namespace PadelApp.Application.Commands.Player.CreateBooking;
+﻿using PadelApp.Domain.Enums;
 
-public record CreateBookingResponse(Guid BookingId, Guid CourtId, string CourtName, Guid BookerId, DateTime StartTime, DateTime EndTime);
+namespace PadelApp.Application.Commands.Player.CreateBooking;
+
+public record CreateBookingResponse(
+    Guid BookingId,
+    Guid CourtId,
+    Guid BookerId,
+    DateTime StartTime,
+    DateTime EndTime,
+    BookingStatus Status);

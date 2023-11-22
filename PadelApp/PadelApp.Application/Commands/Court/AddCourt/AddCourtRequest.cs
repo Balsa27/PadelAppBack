@@ -8,6 +8,8 @@ public record AddCourtRequest(
     string Name,
     string Description,
     Address Address,
-    DateTime WorkStartTime,
-    DateTime WorkEndTime,
-    Price Price);
+    TimeSpan WorkStartTime,
+    TimeSpan WorkEndTime,
+    List<Price> Prices,
+    string? ImageUrl,
+    List<string>? CourtImages);

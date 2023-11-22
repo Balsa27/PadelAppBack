@@ -15,10 +15,10 @@ public class BookingEntityTypeConfig : IEntityTypeConfiguration<Booking>
 
         // Primary Key
         builder.HasKey(b => b.Id);
+        builder.Property(p => p.Id).ValueGeneratedNever();
 
         // Properties
         builder.Property(b => b.CourtId).IsRequired();
-        builder.Property(b => b.CourtName).IsRequired().HasMaxLength(100);
 
         // Booker relationship
         builder.HasOne<Player>()
@@ -34,15 +34,9 @@ public class BookingEntityTypeConfig : IEntityTypeConfiguration<Booking>
         builder.Property(b => b.StartTime).IsRequired();
         builder.Property(b => b.EndTime).IsRequired();
 
-        // WaitingList
-        builder.OwnsOne(b => b.WaitingList, wl =>
-        {
-            wl.WithOwner().HasForeignKey("BookingId");
-            wl.ToTable(TableNames.BookingWaitingList);
-        });
-
-        builder.HasMany(b => b.Attendees)
-            .WithOne() // If there's no navigation property back to Booking in BookingAttendee
-            .HasForeignKey(ba => ba.BookingId);
+   
+        // builder.HasMany(b => b.Attendees)
+        //     .WithOne() // If there's no navigation property back to Booking in BookingAttendee
+        //     .HasForeignKey(ba => ba.BookingId);
     }
 }

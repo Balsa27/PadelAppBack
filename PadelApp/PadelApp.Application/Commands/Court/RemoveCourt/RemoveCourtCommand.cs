@@ -3,7 +3,7 @@ using MediatR;
 
 namespace PadelApp.Application.Commands.Court.RemoveCourt;
 
-public record RemoveCourtCommand(Guid CourtId) : IRequest<RemoveCourtResponse>, IUserAwareRequest
+public record RemoveCourtCommand(Guid CourtId) : IRequest<RemoveCourtResponse>
 {
     public Guid UserId { get; set; }
 } 

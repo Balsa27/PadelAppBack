@@ -2,7 +2,7 @@
 public abstract class Entity : IEquatable<Entity>
 {
     //init - value set once when the object is initialized
-    public Guid Id { get; init; } = Guid.NewGuid();
+    public Guid Id { get; protected init; } = Guid.NewGuid();
 
     public static bool operator ==(Entity? first, Entity? second)
     {

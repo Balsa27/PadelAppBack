@@ -74,4 +74,20 @@ public class BookingRepository : IBookingRepository
 
         return bookings.Count == 0 ? null : bookings;
     }
+
+    public async Task<List<Booking>?> GetCourtUpcomingBookingsAsync(Guid courtId)
+    {
+        var currentTime = DateTime.UtcNow;
+        
+        var bookings = await _dbContext.Courts
+            .Where(c => c.Id == courtId)
+            .SelectMany(c => c.Bookings)
+            .Where(b => 
+                b.Status == BookingStatus.Confirmed &&
+                b.EndTime >= currentTime)
+            .OrderBy(b => b.StartTime)
+            .ToListAsync();
+
+        return bookings.Count == 0 ? null : bookings;
+    }
 }

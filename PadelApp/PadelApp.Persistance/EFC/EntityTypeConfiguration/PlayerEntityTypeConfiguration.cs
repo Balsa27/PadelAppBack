@@ -39,5 +39,8 @@ public class PlayerEntityTypeConfiguration : IEntityTypeConfiguration<Player>
         builder.Property(p => p.AppleId)
             .HasMaxLength(100)
             .IsRequired(false);
+
+        builder.Property(p => p.IsActive)
+            .HasMaxLength(100);
     }
 }

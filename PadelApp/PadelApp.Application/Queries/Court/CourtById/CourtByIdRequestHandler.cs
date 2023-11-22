@@ -22,12 +22,16 @@ public class CourtByIdRequestHandler : IRequestHandler<CourtByIdCommand, CourtBy
 
         return new CourtByIdResponse(
             court.Id,
+            court.OrganizationId,
             court.Name,
             court.Description,
             court.Address,
+            court.WorkingStartTime,
+            court.WorkingEndTime,
             court.Prices,
+            court.Bookings,
             court.ProfileImage,
-            court.CourtImages
-            );
+            court.CourtImages,
+            court.Status);
     }
 }

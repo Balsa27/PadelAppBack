@@ -58,7 +58,7 @@ public class JwtProvider : IJwtProvider
 
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)), 
-            SecurityAlgorithms.Sha256);
+            SecurityAlgorithms.HmacSha256Signature);
         
         var token = new JwtSecurityToken(
             _options.Issuer,
@@ -72,5 +72,10 @@ public class JwtProvider : IJwtProvider
         string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
 
         return tokenValue;
+    }
+
+    public void InvalidateToken(string token)
+    {
+        throw new NotImplementedException("Not implemented yet!");
     }
 }

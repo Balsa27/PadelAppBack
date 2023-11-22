@@ -23,10 +23,10 @@ public class UserUpcomingBookingsRequestHandler : IRequestHandler<UserUpcomingBo
         return bookings.Select(
             b => new UserUpcomingBookingsResponse(
                 b.CourtId,
-                b.CourtName,
                 b.BookerId,
                 b.StartTime,
-                b.EndTime))
+                b.EndTime,
+                b.Status))
             .ToList();
     }
 }

@@ -47,11 +47,11 @@ namespace PadelApp.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("WorkingEndingTime")
-                        .HasColumnType("datetime(6)");
+                    b.Property<TimeSpan>("WorkingEndTime")
+                        .HasColumnType("time(6)");
 
-                    b.Property<DateTime>("WorkingStartTime")
-                        .HasColumnType("datetime(6)");
+                    b.Property<TimeSpan>("WorkingStartTime")
+                        .HasColumnType("time(6)");
 
                     b.HasKey("Id");
 
@@ -76,6 +76,10 @@ namespace PadelApp.Persistance.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<bool>("IsActive")
+                        .HasMaxLength(100)
+                        .HasColumnType("tinyint(100)");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -97,7 +101,6 @@ namespace PadelApp.Persistance.Migrations
             modelBuilder.Entity("PadelApp.Domain.Entities.Booking", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("BookerId")
@@ -105,11 +108,6 @@ namespace PadelApp.Persistance.Migrations
 
                     b.Property<Guid>("CourtId")
                         .HasColumnType("char(36)");
-
-                    b.Property<string>("CourtName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime(6)");
@@ -151,6 +149,10 @@ namespace PadelApp.Persistance.Migrations
                     b.Property<string>("GoogleId")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsActive")
+                        .HasMaxLength(100)
+                        .HasColumnType("tinyint(100)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -173,11 +175,11 @@ namespace PadelApp.Persistance.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<DateTime?>("WorkingEndingHours")
-                        .HasColumnType("datetime(6)");
+                    b.Property<TimeSpan>("WorkingEndingHours")
+                        .HasColumnType("time(6)");
 
-                    b.Property<DateTime?>("WorkingStartHours")
-                        .HasColumnType("datetime(6)");
+                    b.Property<TimeSpan>("WorkingStartHours")
+                        .HasColumnType("time(6)");
 
                     b.HasKey("Id");
 
@@ -195,11 +197,48 @@ namespace PadelApp.Persistance.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid?>("OrganizationId1")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("OrganizationId", "CourtId");
 
                     b.HasIndex("CourtId");
 
+                    b.HasIndex("OrganizationId1");
+
                     b.ToTable("OrganizationCourt");
+                });
+
+            modelBuilder.Entity("PadelApp.Domain.ValueObjects.Price", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<Guid>("CourtId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Days")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("DaysOfWeek");
+
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time(6)");
+
+                    b.Property<TimeSpan>("TimeEnd")
+                        .HasColumnType("time(6)");
+
+                    b.Property<TimeSpan>("TimeStart")
+                        .HasColumnType("time(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourtId");
+
+                    b.ToTable("CourtPrices", (string)null);
                 });
 
             modelBuilder.Entity("PadelApp.Persistance.Dbos.BookingAttendee", b =>
@@ -276,39 +315,7 @@ namespace PadelApp.Persistance.Migrations
 
                             b1.HasKey("CourtId");
 
-                            b1.ToTable("Courts");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CourtId");
-                        });
-
-                    b.OwnsMany("PadelApp.Domain.ValueObjects.Price", "Prices", b1 =>
-                        {
-                            b1.Property<Guid>("CourtId")
-                                .HasColumnType("char(36)");
-
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int");
-
-                            b1.Property<decimal>("Amount")
-                                .HasColumnType("decimal(65,30)");
-
-                            b1.Property<int?>("Day")
-                                .HasColumnType("int");
-
-                            b1.Property<TimeSpan>("Duration")
-                                .HasColumnType("time(6)");
-
-                            b1.Property<TimeSpan?>("TimeEnd")
-                                .HasColumnType("time(6)");
-
-                            b1.Property<TimeSpan?>("TimeStart")
-                                .HasColumnType("time(6)");
-
-                            b1.HasKey("CourtId", "Id");
-
-                            b1.ToTable("CourtPrices", (string)null);
+                            b1.ToTable("CourtAddress", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CourtId");
@@ -316,8 +323,6 @@ namespace PadelApp.Persistance.Migrations
 
                     b.Navigation("Address")
                         .IsRequired();
-
-                    b.Navigation("Prices");
                 });
 
             modelBuilder.Entity("PadelApp.Domain.Entities.Booking", b =>
@@ -332,28 +337,6 @@ namespace PadelApp.Persistance.Migrations
                         .WithMany("Bookings")
                         .HasForeignKey("CourtId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("PadelApp.Domain.ValueObjects.WaitingList", "WaitingList", b1 =>
-                        {
-                            b1.Property<Guid>("BookingId")
-                                .HasColumnType("char(36)");
-
-                            b1.Property<Guid?>("CurrentUserId")
-                                .HasColumnType("char(36)");
-
-                            b1.Property<Guid>("Id")
-                                .HasColumnType("char(36)");
-
-                            b1.HasKey("BookingId");
-
-                            b1.ToTable("BookingWaitingList", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("BookingId");
-                        });
-
-                    b.Navigation("WaitingList")
                         .IsRequired();
                 });
 
@@ -397,10 +380,6 @@ namespace PadelApp.Persistance.Migrations
                             b1.Property<Guid>("OrganizationId")
                                 .HasColumnType("char(36)");
 
-                            b1.Property<string>("Email")
-                                .IsRequired()
-                                .HasColumnType("longtext");
-
                             b1.Property<string>("PhoneNumber")
                                 .IsRequired()
                                 .HasColumnType("longtext");
@@ -424,18 +403,28 @@ namespace PadelApp.Persistance.Migrations
 
             modelBuilder.Entity("PadelApp.Domain.Entities.OrganizationCourt", b =>
                 {
-                    b.HasOne("PadelApp.Domain.Entities.Organization", null)
-                        .WithMany("Courts")
+                    b.HasOne("PadelApp.Domain.Aggregates.Court", null)
+                        .WithMany()
                         .HasForeignKey("CourtId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("PadelApp.Domain.Entities.Organization", null)
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PadelApp.Domain.Entities.Organization", null)
+                        .WithMany("Courts")
+                        .HasForeignKey("OrganizationId1");
                 });
 
-            modelBuilder.Entity("PadelApp.Persistance.Dbos.BookingAttendee", b =>
+            modelBuilder.Entity("PadelApp.Domain.ValueObjects.Price", b =>
                 {
-                    b.HasOne("PadelApp.Domain.Entities.Booking", null)
-                        .WithMany("Attendees")
-                        .HasForeignKey("BookingId")
+                    b.HasOne("PadelApp.Domain.Aggregates.Court", null)
+                        .WithMany("Prices")
+                        .HasForeignKey("CourtId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -443,11 +432,8 @@ namespace PadelApp.Persistance.Migrations
             modelBuilder.Entity("PadelApp.Domain.Aggregates.Court", b =>
                 {
                     b.Navigation("Bookings");
-                });
 
-            modelBuilder.Entity("PadelApp.Domain.Entities.Booking", b =>
-                {
-                    b.Navigation("Attendees");
+                    b.Navigation("Prices");
                 });
 
             modelBuilder.Entity("PadelApp.Domain.Entities.Organization", b =>

@@ -26,21 +26,20 @@ public class CreateBookingRequestHandler : IRequestHandler<CreateBookingCommand,
 
         var booking = new Domain.Entities.Booking(
             request.CourtId,
-            request.CortName,
             request.BookerId,
             request.StartTime,
             request.EndTime);
         
         court.CreateBooking(booking);
-
+        
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return new CreateBookingResponse(
             booking.Id,
             booking.CourtId,
-            booking.CourtName,
             booking.BookerId,
             booking.StartTime,
-            booking.EndTime);
+            booking.EndTime,
+            booking.Status);
     }
 }

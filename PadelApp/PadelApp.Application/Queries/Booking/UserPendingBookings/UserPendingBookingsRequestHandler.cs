@@ -14,7 +14,7 @@ public class UserPendingBookingsRequestHandler : IRequestHandler<UserPendingBook
 
     public async Task<List<UserPendingBookingsResponse>?> Handle(UserPendingBookingsCommand request, CancellationToken cancellationToken)
     {
-        var bookings = await _bookingRepository.GetUserPendingBookingAsync(request.UserId);
+        var bookings = await _bookingRepository.GetUserPendingBookingAsync(request.Id);
         
         if (bookings is null)
             return null;
@@ -22,10 +22,10 @@ public class UserPendingBookingsRequestHandler : IRequestHandler<UserPendingBook
         return bookings.Select(
                 b => new UserPendingBookingsResponse(
                     b.CourtId,
-                    b.CourtName,
                     b.BookerId,
                     b.StartTime,
-                    b.EndTime))
+                    b.EndTime,
+                    b.Status))
             .ToList();
     }
 }

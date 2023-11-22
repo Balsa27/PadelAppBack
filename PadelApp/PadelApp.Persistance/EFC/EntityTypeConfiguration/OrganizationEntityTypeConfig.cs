@@ -25,6 +25,9 @@ public class OrganizationEntityTypeConfig : IEntityTypeConfiguration<Organizatio
         builder.Property(o => o.Name).IsRequired().HasMaxLength(100);
         builder.Property(o => o.Description).HasMaxLength(500);
         builder.Property(o => o.Status).HasConversion<string>();
+        builder.Property(p => p.IsActive)
+            .HasMaxLength(100);
+        
         
         builder.OwnsOne(o => o.Address, a =>
         {
@@ -38,9 +41,8 @@ public class OrganizationEntityTypeConfig : IEntityTypeConfiguration<Organizatio
             c.WithOwner().HasForeignKey("OrganizationId");
         });
 
-
-        builder.HasMany(o => o.Courts)
-            .WithOne()
-            .HasForeignKey(oc => oc.CourtId);
+        // builder.HasMany(o => o.Courts)
+        //     .WithOne()
+        //     .HasForeignKey(oc => oc.CourtId);
     }
 }

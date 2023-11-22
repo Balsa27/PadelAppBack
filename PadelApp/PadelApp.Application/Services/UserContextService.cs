@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using DrealStudio.Application.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -15,12 +16,18 @@ public class UserContextService : IUserContextService
 
     public Guid GetCurrentUserId()
     {
-        var userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst(JwtRegisteredClaimNames.Sub);
+        var user = _httpContextAccessor.HttpContext?.User;
+        
+        if (user?.Identity != null && (user == null || !user.Identity.IsAuthenticated))
+            throw new UnauthorizedAccessException("User is not authenticated.");
+
+        var userIdClaim = user?.FindFirst(ClaimTypes.NameIdentifier);
         
         if (userIdClaim != null && Guid.TryParse(userIdClaim.Value, out var userId))
         {
             return userId;
         }
-        throw new UnauthorizedAccessException("User is not authenticated or user ID is missing from token.");
+
+        throw new UnauthorizedAccessException("User ID is missing from token.");
     }
 }

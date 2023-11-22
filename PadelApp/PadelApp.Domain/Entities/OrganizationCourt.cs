@@ -6,4 +6,10 @@ public class OrganizationCourt : Entity
 {
     public Guid OrganizationId { get; init; }
     public Guid CourtId { get; init; }
+
+    public OrganizationCourt(Guid organizationId, Guid courtId)
+    {
+        OrganizationId = organizationId;
+        CourtId = courtId;
+    }
 }

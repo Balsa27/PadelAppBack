@@ -1,88 +1,31 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
-using PadelApp.Application.Commands.Player.AppleSignIn;
-using PadelApp.Application.Commands.Player.GoogleSignIn;
-using PadelApp.Application.Commands.Player.Login;
-using PadelApp.Application.Handlers;
-using PadelApp.Presentation.Contracts.Player;
+using PadelApp.Application.Commands.Player.DeleteUser;
+using PadelApp.Domain.Enums;
+using PadelApp.Presentation.Attributes;
 
 namespace PadelApp.Presentation.Controllers;
 
 [ApiController]
-[Route("/api/auth")]
+[Route("api/player")]
 public class PlayerController : ControllerBase
 {
-    private readonly IMediator _mediator;   
-
+    private readonly IMediator _mediator;
+    
     public PlayerController(IMediator mediator)
     {
         _mediator = mediator;
     }
     
-    [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterPlayerRequest request, CancellationToken cancellationToken)
+    [Token(Role.Player)]
+    [HttpPost("delete")]
+    public async Task<IActionResult> Delete(CancellationToken cancellationToken)
     {
-        var command = new PlayerRegisterCommand(
-            request.Username,
-            request.Password,
-            request.Email);
-
-        var result = await _mediator.Send(command, cancellationToken);
-
-        if (result.IsFailure)
-            return BadRequest(new { Error = result.Error.Message });
-        
-        return Created(string.Empty, new { Token = result.Value });
-    }
-    
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginPlayerRequest request, CancellationToken cancellationToken)
-    {
-        var command = new PlayerLoginCommand(
-            request.login,
-            request.password);
-        
-        var result = await _mediator.Send(command, cancellationToken);
-
-        if (result.IsFailure)
-            return BadRequest(new { Error = result.Error.Message });
-        
-        return Ok(new { Token = result.Value });
-    }
-
-    [HttpPost("google-signin")]
-    public async Task<IActionResult> GoogleSignIn([FromBody] GoogleSignInRequest request,
-        CancellationToken cancellationToken)
-    {
-        var command = new GoogleSignInCommand(request.GoogleToken);
+        var command = new DeletePlayerCommand();
         
         var result = await _mediator.Send(command, cancellationToken);
         
-        if (result.IsFailure)
-            return BadRequest(new { Error = result.Error.Message });
-        
-        return Created(string.Empty, new { Token = result.Value.JwtToken});
+        return Ok(result);
     }
-
-    [HttpPost("apple-signin")]
-    public async Task<IActionResult> AppleSignIn([FromBody] AppleSignInRequest request,
-        CancellationToken cancellationToken)
-    {
-        var command = new AppleSignInCommand(request.AppleToken);
-        
-        var result = await _mediator.Send(command, cancellationToken);
-        
-        if (result.IsFailure)
-            return BadRequest(new { Error = result.Error.Message });
-        
-        return Ok(new { string.Empty, Token = result.Value.Token});
-    }
-
-    [HttpGet("test")]
-    public string Test(CancellationToken token)
-    {
-        return "hello!";
-    }
-
 }

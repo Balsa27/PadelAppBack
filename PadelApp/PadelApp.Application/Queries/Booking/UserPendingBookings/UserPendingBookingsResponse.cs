@@ -1,8 +1,10 @@
-﻿namespace PadelApp.Application.Queries.Booking.UserPendingBookings;
+﻿using PadelApp.Domain.Enums;
+
+namespace PadelApp.Application.Queries.Booking.UserPendingBookings;
 
 public record UserPendingBookingsResponse(
     Guid CourtId,
-    string CourtName,
     Guid BookerId,
     DateTime StartTime,
-    DateTime EndTime);
+    DateTime EndTime,
+    BookingStatus Status);

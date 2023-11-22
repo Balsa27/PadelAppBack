@@ -8,7 +8,7 @@ using PadelApp.Persistance.Outbox;
 namespace PadelApp.Persistance.EFC;
 
 public class ApplicationDbContext : DbContext
-{
+{ 
     private readonly IConfiguration _configuration;
     public DbSet<Player> Players { get; set; } = null!;
     public DbSet<Organization> Organizations { get; set; } = null!;
@@ -20,11 +20,9 @@ public class ApplicationDbContext : DbContext
     }
     
     public ApplicationDbContext(
-        DbContextOptions<ApplicationDbContext> options,
-        IConfiguration configuration) 
+        DbContextOptions<ApplicationDbContext> options) 
         : base(options)
     {
-        _configuration = configuration;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

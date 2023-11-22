@@ -8,9 +8,8 @@ public record AddCourtCommand(
     string Name,
     string Description,
     Address Address,
-    DateTime WorkStartTime,
-    DateTime WorkEndTime,
-    Price Price) : IRequest<AddCourtResponse>, IUserAwareRequest
-{
-    public Guid UserId { get; set; }
-}
+    TimeSpan WorkStartTime,
+    TimeSpan WorkEndTime,
+    List<Price> Prices,
+    string? imageUrl,
+    List<string>? courtImages) : IRequest<AddCourtResponse>;

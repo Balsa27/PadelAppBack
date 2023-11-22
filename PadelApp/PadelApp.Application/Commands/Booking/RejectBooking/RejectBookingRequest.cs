@@ -4,4 +4,4 @@ using PadelApp.Application.Commands.Booking.AcceptBooking;
 
 namespace PadelApp.Application.Commands.Booking.RejectBooking;
 
-public record RejectBookingRequest(Guid BookingId, Guid BookerId, Guid CourtId);
+public record RejectBookingRequest(Guid BookingId, Guid CourtId);

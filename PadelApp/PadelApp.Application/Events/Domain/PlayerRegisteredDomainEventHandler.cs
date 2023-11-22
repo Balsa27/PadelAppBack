@@ -15,6 +15,6 @@ public class PlayerRegisteredDomainEventHandler : INotificationHandler<PlayerReg
 
     public Task Handle(PlayerRegisteredDomainEvent notification, CancellationToken cancellationToken) 
     {
-        return _email.SendWelcomeEmailAsync(notification.Email, notification.Username);
+        return  _email.SendWelcomeEmailAsync(notification.Email, notification.Username);
     }
 }

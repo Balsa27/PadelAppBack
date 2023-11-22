@@ -2,6 +2,6 @@
 
 public enum Role
 {
-    USER,
-    COURT_OWNER
+    Player,
+    Organization,
 }

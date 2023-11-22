@@ -12,4 +12,5 @@ public interface IPlayerRepository
     Task AddAsync(Player player);
     Task<Player?> GetByGoogleId(string googleId);
     Task<Player?> GetByAppleId(string appleId);
+    void Update(Player player);
 }

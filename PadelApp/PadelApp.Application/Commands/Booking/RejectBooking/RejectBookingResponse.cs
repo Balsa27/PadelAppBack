@@ -1,3 +1,3 @@
 ﻿namespace PadelApp.Application.Commands.Booking.RejectBooking;
 
-public record RejectBookingResponse(bool IsRejected);
+public record RejectBookingResponse(string Message);

@@ -44,4 +44,5 @@ public class PlayerRepository : IPlayerRepository
     public async Task<Player?> GetByAppleId(string appleId)
         => await _dbContext.Players.FirstOrDefaultAsync(p => p.AppleId == appleId);
     
+    public void Update(Player player) => _dbContext.Players.Update(player);
 }

@@ -6,7 +6,7 @@ namespace PadelApp.Infrastructure.SignalR;
 
 public class NotificationHub : Hub
 {
-    static ConcurrentDictionary<string, string> _users = new();
+    public static ConcurrentDictionary<string, string> _users = new();
     
     public override Task OnConnectedAsync()
     {
@@ -15,7 +15,7 @@ public class NotificationHub : Hub
         if (httpContext is not null)
         {
             var userId = httpContext.Request.Query["userId"];
-            _users.TryAdd(Context.ConnectionId, userId);
+            _users[Context.ConnectionId] = userId;
         }
         
         return base.OnConnectedAsync();

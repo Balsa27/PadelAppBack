@@ -5,6 +5,7 @@ using PadelApp.Application.Commands.Booking.RejectBooking;
 using PadelApp.Application.Commands.Player.CreateBooking;
 using PadelApp.Application.Queries.Booking.AllPendingBookings;
 using PadelApp.Application.Queries.Booking.BookingById;
+using PadelApp.Application.Queries.Booking.CourtUpcommingBookings;
 using PadelApp.Application.Queries.Booking.UserPendingBookings;
 using PadelApp.Application.Queries.Booking.UserUpcomingBookings;
 using PadelApp.Domain.Enums;
@@ -23,14 +24,13 @@ public class BookingController : ControllerBase
         _mediator = mediator;
     }
     
-    [Token(Role.USER)]
+    [Token(Role.Player)]
     [HttpPost("create")]
     public async Task<IActionResult> CreateBooking([FromBody] CreateBookingRequest request,
         CancellationToken cancellationToken)
     {
         var command = new CreateBookingCommand(
             request.CourtId,
-            request.CourtName,
             request.BookerId,
             request.StartTime,
             request.EndTime);
@@ -40,13 +40,12 @@ public class BookingController : ControllerBase
         return Ok(result);
     }
     
-    [Token(Role.COURT_OWNER)]
+    [Token(Role.Organization)]
     [HttpPost("accept")]
     public async Task<IActionResult> AcceptBooking([FromBody] AcceptBookingRequest request, CancellationToken cancellationToken)
     {
         var command = new AcceptBookingCommand(
             request.BookingId,
-            request.BookerId,
             request.CourtId);
         
         var result = await _mediator.Send(command, cancellationToken);
@@ -54,14 +53,13 @@ public class BookingController : ControllerBase
         return Ok(result);
     }
 
-    [Token(Role.COURT_OWNER)]
+    [Token(Role.Organization)]
     [HttpPost("reject")]
     public async Task<IActionResult> RejectBooking([FromBody] RejectBookingRequest request,
         CancellationToken cancellationToken)
     {
         var command = new RejectBookingCommand(
             request.BookingId,
-            request.BookerId,
             request.CourtId);
         
         var result = await _mediator.Send(command, cancellationToken);
@@ -69,43 +67,52 @@ public class BookingController : ControllerBase
         return Ok(result);
     }
     
-    [HttpGet("get/id")]
-    public async Task<IActionResult> GetBookingById([FromBody] BookingByIdRequest request, CancellationToken cancellationToken)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetBookingById(Guid id, CancellationToken cancellationToken)
     {
-        var command = new BookingByIdCommand(request.BookingId);
+        var command = new BookingByIdCommand(id);
         
         var result = await _mediator.Send(command, cancellationToken);
         
         return Ok(result);
     }
     
-    [Token(Role.COURT_OWNER)]
-    [HttpGet("/court-pending")]
-    public async Task<IActionResult> GetCourtPendingBookings([FromBody] CourtPendingBookingsCommand request, CancellationToken cancellationToken)
+    [Token(Role.Organization)]
+    [HttpGet("court-pending/{id}")]
+    public async Task<IActionResult> GetCourtPendingBookings(Guid id, CancellationToken cancellationToken)
     {
-        var command = new CourtPendingBookingsCommand(request.CourtId);
+        var command = new CourtPendingBookingsCommand(id);
         
         var result = await _mediator.Send(command, cancellationToken);
         
         return Ok(result);
     }
     
-    [Token(Role.USER)]
-    [HttpGet("user-pending")]
-    public async Task<IActionResult> GetUserPendingBookings([FromBody] UserPendingBookingsCommand request, CancellationToken cancellationToken)
+    [Token(Role.Player)]
+    [HttpGet("user-pending/{id}")]
+    public async Task<IActionResult> GetUserPendingBookings(Guid id, CancellationToken cancellationToken)
     {
-        var command = new UserPendingBookingsCommand();
+        var command = new UserPendingBookingsCommand(id);
         
         var result = await _mediator.Send(command, cancellationToken);
         
         return Ok(result);
     }
     
-    [Token(Role.USER)]
-    [HttpGet("user-upcoming")]
-    public async Task<IActionResult> GetUserUpcomingBookings([FromBody] UserUpcomingBookingsCommand request, CancellationToken cancellationToken)
+    [HttpGet("user-upcoming/{id}")]
+    public async Task<IActionResult> GetUserUpcomingBookings(Guid id, CancellationToken cancellationToken)
     {
-        var command = new UserUpcomingBookingsCommand();
+        var command = new UserUpcomingBookingsCommand(id);
+        
+        var result = await _mediator.Send(command, cancellationToken);
+        
+        return Ok(result);
+    }
+    
+    [HttpGet("court-upcoming/{id}")]
+    public async Task<IActionResult> GetCourtUpcomingBookings(Guid id, CancellationToken cancellationToken)
+    {
+        var command = new CourtUpcomingBookingsCommand(id);
         
         var result = await _mediator.Send(command, cancellationToken);
         

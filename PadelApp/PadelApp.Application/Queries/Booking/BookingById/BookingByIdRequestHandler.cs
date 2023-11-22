@@ -27,7 +27,6 @@ public class BookingByIdRequestHandler : IRequestHandler<BookingByIdCommand, Boo
         return new BookingByIdResponse(
             booking.Id,
             booking.CourtId,
-            booking.CourtName,
             booking.BookerId,
             booking.StartTime,
             booking.EndTime,

@@ -7,11 +7,10 @@ namespace PadelApp.Domain.Entities;
 
 public class Booking : Entity
 {
-    //todo: potentially add a list of user ids who attend booking
     public Guid CourtId { get; private set; }
-    public string CourtName { get; private set; }
-    public List<BookingAttendee> Attendees { get; private set; } = new ();
-    public WaitingList WaitingList { get; private set; } = new();
+    //public string CourtName { get; private set; }
+    //public List<BookingAttendee> Attendees { get; private set; } = new ();
+    //public WaitingList WaitingList { get; private set; } = new();
     public Guid BookerId { get; private set; }
     public BookingStatus Status { get; private set; }
     public DateTime StartTime { get; private set; }
@@ -19,20 +18,17 @@ public class Booking : Entity
     
     public Booking(
         Guid courtId,
-        string courtName,
         Guid bookerId,
-        BookingStatus status,
         DateTime startTime,
         DateTime endTime)
     {
         ValidateBooking(startTime, endTime);
        
         CourtId = courtId;
-        CourtName = courtName;
         BookerId = bookerId;
-        Status = status;
         StartTime = startTime;
         EndTime = endTime;
+        Status = BookingStatus.Pending;
     }
     
     public Booking(
@@ -43,20 +39,19 @@ public class Booking : Entity
         DateTime endTime)
     {
         CourtId = courtId;
-        CourtName = courtName;
         BookerId = bookerId;
         StartTime = startTime;
         EndTime = endTime;
         Status = BookingStatus.Pending;
     }
     
-    public void AddAttendee(Guid playerId)
-    {
-        if (Attendees.Any(a => a.PlayerId == playerId))
-            throw new InvalidOperationException("User is already attending the booking");
-
-        Attendees.Add(new BookingAttendee { BookingId = this.Id, PlayerId = playerId });
-    }
+    // public void AddAttendee(Guid playerId)
+    // {
+    //     if (Attendees.Any(a => a.PlayerId == playerId))
+    //         throw new InvalidOperationException("User is already attending the booking");
+    //
+    //     Attendees.Add(new BookingAttendee { BookingId = this.Id, PlayerId = playerId });
+    // }
  
     public void Confirm()
     {
@@ -83,7 +78,7 @@ public class Booking : Entity
         
         Status = BookingStatus.Cancelled;
         
-        WaitingList.NotifyNextUser();
+        //WaitingList.NotifyNextUser();
     }
     
     public void RescheduleBooking(DateTime startTime, DateTime endTime) 
@@ -97,16 +92,16 @@ public class Booking : Entity
 
     public void AcceptWaitingList(Guid userId)
     {
-        WaitingList.Accept(userId);
+        //WaitingList.Accept(userId);
     }
     
     public void RejectWaitingList(Guid userId)
     {
-        WaitingList.Reject(userId);
-        WaitingList.NotifyNextUser();
+        // WaitingList.Reject(userId);
+        // WaitingList.NotifyNextUser();
     }
 
-    public bool IsOverlapping(DateTime start, DateTime end) => StartTime < end && start < EndTime;
+    public bool IsOverlapping(DateTime start, DateTime end) => StartTime < end && start < EndTime && Status == BookingStatus.Confirmed;
     
     private void ValidateBooking(DateTime startTime, DateTime endTime)
     {

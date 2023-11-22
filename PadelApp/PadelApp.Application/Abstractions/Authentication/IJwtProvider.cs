@@ -7,4 +7,5 @@ public interface IJwtProvider
 {
     string GeneratePlayerToken(Player player);
     string GenerateOrganizationToken(Organization organization);
+    void InvalidateToken(string token);
 }

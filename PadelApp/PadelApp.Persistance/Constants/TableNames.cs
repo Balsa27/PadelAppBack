@@ -11,4 +11,5 @@ public static class TableNames
     public static string Bookings => "Bookings";
     public static string BookingWaitingList => "BookingWaitingList";
     public static string BookingAttendees => "BookingAttendees";
+    public static string CourtAddress => "CourtAddress";
 }

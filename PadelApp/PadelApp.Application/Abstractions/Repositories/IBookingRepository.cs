@@ -8,4 +8,5 @@ public interface IBookingRepository
     public Task<List<Booking>?> GetUserUpcomingBookingAsync(Guid userId);
     public Task<List<Booking>?> GetUserPendingBookingAsync(Guid userId);
     public Task<List<Booking>?> GetCourtPendingBookingsAsync(Guid courtId);
+    public Task<List<Booking>?> GetCourtUpcomingBookingsAsync(Guid courtId);
 }

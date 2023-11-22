@@ -2,6 +2,7 @@
 using PadelApp.Application.Abstractions;
 using PadelApp.Application.Abstractions.Repositories;
 using PadelApp.Application.Exceptions;
+using PadelApp.Application.Strings;
 
 namespace PadelApp.Application.Commands.Booking.AcceptBooking;
 
@@ -28,10 +29,10 @@ public class AcceptBookingRequestHandler : IRequestHandler<AcceptBookingCommand,
         if (booking is null)
             throw new BookingNotFoundException($"Booking with id {request.BookingId} not found");
         
-        court.AcceptBooking(booking, request.BookerId);
+        court.AcceptBooking(booking, booking.BookerId);
         
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         
-        return new AcceptBookingResponse(true);
+        return new AcceptBookingResponse(HandlerStrings.BookingAccepted);
     }
 }

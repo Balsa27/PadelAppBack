@@ -2,6 +2,7 @@
 using PadelApp.Domain.DomainEvents;
 using PadelApp.Domain.Entities;
 using PadelApp.Domain.Enums;
+using PadelApp.Domain.Events.DomainEvents;
 using PadelApp.Domain.Events.DomainEvents.DomainEventConverter;
 using PadelApp.Domain.Primitives;
 using PadelApp.Domain.ValueObjects;
@@ -14,8 +15,8 @@ public class Court : AggregateRoot
     public string Name { get; private set; }
     public string Description { get; private set; }
     public string? ProfileImage { get; private set; }
-    public DateTime WorkingStartTime { get; private set; }
-    public DateTime WorkingEndingTime { get; private set; }
+    public TimeSpan WorkingStartTime { get; private set; }
+    public TimeSpan WorkingEndTime { get; private set; }
     public CourtStatus Status { get; private set; }
     public Address Address { get; private set; }
     public List<Booking> Bookings { get; private set; } = new();
@@ -26,114 +27,163 @@ public class Court : AggregateRoot
     {
         
     }
-    
     public Court(
+        Guid organizationId,
         string name,
         string description,
         Address address,
-        DateTime workingStartTime,
-        DateTime workingEndingTime,
-        Price prices)
-    {
-        Name = name;
-        Description = description;
-        Address = address;
-        WorkingStartTime = workingStartTime;
-        WorkingEndingTime = workingEndingTime;
-        AddCourtPricing(prices);
-    }
-
-    public Court(
-        Guid id, 
-        string name,
-        string description,
-        Address address,
-        DateTime workingStartTime,
-        DateTime workingEndingTime,
+        TimeSpan workingStartTime,
+        TimeSpan workingEndTime,
         List<Price> prices,
-        List<Booking> bookings,
-        List<string>? courtImages,
-        string? imageUrl,
-        CourtStatus status,
-        Guid organizationId)
+        string? profileImage = null,
+        List<string>? courtImages = null)
     {
-        Id = id;
+        OrganizationId = organizationId;
         Name = name;
         Description = description;
         Address = address;
         WorkingStartTime = workingStartTime;
-        WorkingEndingTime = workingEndingTime;
-        Prices = prices;
-        Bookings = bookings;
+        WorkingEndTime = workingEndTime;
+        ProfileImage = profileImage;
         CourtImages = courtImages;
-        ProfileImage = imageUrl;
-        Status = status;
+        Status = CourtStatus.Available; // Initializing with Available status
+        
+        ConstructorPriceValidate(prices);
+        RaiseDomainEvent(new CourtCreatedDomainEvent(Id, OrganizationId));
+    }
+
+   
+    
+    public Court(
+        Guid courtId,
+        Guid organizationId,
+        string name,
+        string description,
+        Address address,
+        TimeSpan workingStartTime,
+        TimeSpan workingEndTime,
+        CourtStatus status,
+        List<Booking> bookings,
+        List<Price> prices,
+        string? profileImage = null,
+        List<string>? courtImages = null)
+    {
+        Id = courtId;
         OrganizationId = organizationId;
+        Name = name;
+        Description = description;
+        Address = address;
+        WorkingStartTime = workingStartTime;
+        WorkingEndTime = workingEndTime;
+        Status = status;
+        Bookings = bookings;
+        Prices = prices;
+        ProfileImage = profileImage;
+        CourtImages = courtImages;
     }
     
-    public Court(string name, string description, Address address, Price price,
-        string? imageUrl = null, List<string>? courtImages = null)
+    // public Court(
+    //     string name,
+    //     string description,
+    //     Address address,
+    //     TimeSpan workingStartTime,
+    //     TimeSpan workingEndingTime,
+    //     Price prices)
+    // {
+    //     Name = name;
+    //     Description = description;
+    //     Address = address;
+    //     WorkingStartTime = workingStartTime;
+    //     WorkingEndTime = workingEndingTime;
+    //     AddCourtPricing(prices);
+    // }
+
+    // public Court(
+    //     Guid id, 
+    //     string name,
+    //     string description,
+    //     Address address,
+    //     DateTime workingStartTime,
+    //     DateTime workingEndingTime,
+    //     List<Price> prices,
+    //     List<Booking> bookings,
+    //     List<string>? courtImages,
+    //     string? imageUrl,
+    //     CourtStatus status,
+    //     Guid organizationId)
+    // {
+    //     Id = id;
+    //     Name = name;
+    //     Description = description;
+    //     Address = address;
+    //     WorkingStartTime = workingStartTime;
+    //     WorkingEndingTime = workingEndingTime;
+    //     Prices = prices;
+    //     Bookings = bookings;
+    //     CourtImages = courtImages;
+    //     ProfileImage = imageUrl;
+    //     Status = status;
+    //     OrganizationId = organizationId;
+    // }
+    
+    public void UpdateCourtDetails(string name, string description, Address address, TimeSpan start, TimeSpan end)
     {
         Name = name;
         Description = description;
         Address = address;
-        ProfileImage = imageUrl;
-        CourtImages = courtImages;
-        AddCourtPricing(price);
+        WorkingStartTime = start;
+        WorkingEndTime = end;
     }
-    
-    public void UpdateCourtDetails(
-        string? name = null,
-        string? description = null,
-        Address? address = null)
-    {
-        if(name is not null)
-            Name = name;
-        if(description is not null)
-            Description = description;
-        if(address is not null)
-            Address = address;
-    }
-
+   
     public bool IsAvailable(DateTime startTime, DateTime endTime)
     {
-        if(Status != CourtStatus.Available)
+        // Basic validation checks
+        if (Status != CourtStatus.Available)
             return false;
-        if(startTime == endTime)
+
+        if (startTime == endTime)
             return false;
-        if(startTime < DateTime.Now)
+
+        if (startTime < DateTime.Now)
             return false;
+
         if (startTime > endTime)
             return false;
+
+        // Extracting time and day of the week from the booking
+        TimeSpan startTimeSpan = startTime.TimeOfDay;
+        TimeSpan endTimeSpan = endTime.TimeOfDay;
         
-        if (startTime < WorkingStartTime ||
-            endTime > WorkingEndingTime)
+
+        // Checking if the booking time slot is within court working hours
+        if (startTimeSpan < WorkingStartTime || endTimeSpan > WorkingEndTime)
             return false;
-        
+
+        // Checking if the booking duration matches any price duration
         var duration = endTime - startTime;
-        
         var isValidDuration = Prices.Any(p => p.Duration == duration);
+
+        if (!isValidDuration)
+            return false;
+
+        // Checking if the booking overlaps with existing bookings
+        var overlapsWithExistingBooking = Bookings.Any(b => b.IsOverlapping(startTime, endTime));
+
+        if (overlapsWithExistingBooking)
+            return false;
+
+        // Checking if there is a matching price for the booking's day and time
         
-        if(!isValidDuration)
-            return false;
+        DayOfWeek bookingDayOfWeek = startTime.DayOfWeek;        
+        
+        var isPriceApplicableAndAvailable = Prices.Any(price =>
+            price.Days.Contains(bookingDayOfWeek) &&
+            startTimeSpan >= price.TimeStart &&
+            endTimeSpan <= price.TimeEnd);
 
-        var overlaps = Bookings.Any(b => b.IsOverlapping(startTime, endTime));
-
-        if (overlaps)
-            return false;
-
-        var isValidTimeSlot = Prices.Any(price => 
-            (price.TimeStart == null || startTime.TimeOfDay >= price.TimeStart) && 
-            (price.TimeEnd == null || endTime.TimeOfDay <= price.TimeEnd));
-
-        var blocksExistingTimeSlot = Prices.Any(price => 
-            startTime.TimeOfDay < price.TimeStart && endTime.TimeOfDay > price.TimeEnd);
-
-        if (blocksExistingTimeSlot)
-            return false;
-
-        return isValidTimeSlot;
+        return isPriceApplicableAndAvailable;
     }
+
     
     public void CreateBooking(Booking booking)
     {
@@ -141,26 +191,35 @@ public class Court : AggregateRoot
             throw new CourtNotAvailableException("Cannot add booking to court");
         
         Bookings.Add(booking);
+        
+        RaiseDomainEvent(new BookingCreatedDomainEvent(OrganizationId));
     }
     
     public void AcceptBooking(Booking existingBooking, Guid bookerId)
     {
         if (existingBooking.Status == BookingStatus.Confirmed)
             throw new Exception("Booking is already confirmed");
-        
+
         existingBooking.Confirm();
         
         RaiseDomainEvent(new BookingAcceptedDomainEvent(existingBooking.Id, bookerId));
+    }
+
+    public void RemovePrices()
+    {
+        Prices.Clear();
     }
 
     public void RejectBooking(Booking existingBooking, Guid bookerId)
     {
         if (existingBooking.Status == BookingStatus.Rejected)
             throw new Exception("Booking is already rejected");
-        
+        if (existingBooking.Status == BookingStatus.Confirmed)
+            throw new Exception("Booking is already confirmed");
+            
         existingBooking.Reject();
         
-        RaiseDomainEvent(new BookingRejectedDomainEvent(existingBooking.Id, bookerId));        
+        //RaiseDomainEvent(new BookingRejectedDomainEvent(existingBooking.Id, bookerId));        
     }
 
     public void RescheduleBooking(Booking existingBooking, DateTime startTime, DateTime endTime)
@@ -222,28 +281,79 @@ public class Court : AggregateRoot
         Status = status;
     }
 
+    public void UpdateCourtPricing(Price price)
+    {
+        var existingPrice = Prices.FirstOrDefault(p => p.Id == price.Id);
+        
+        if (existingPrice is null)
+            throw new PriceNotFoundException("Price not found");
+
+        Prices.Remove(existingPrice);
+
+        try
+        {
+            ValidatePrice(price);
+            existingPrice.Update(price);
+        }
+        finally
+        {
+            Prices.Add(existingPrice);
+        }
+        
+        existingPrice.Update(price);
+    }
+
+    public void RemoveCourtPricing(Guid priceId)
+    {
+        var existingPrice = Prices.FirstOrDefault(p => p.Id == priceId);
+        
+        if (existingPrice is null)
+            throw new PriceNotFoundException("Price not found");
+
+        Prices.Remove(existingPrice);
+    }
+    
     public void AddCourtPricing(Price price)
     {
         ValidatePrice(price);
         Prices.Add(price);
     }
-
-    public void UpdatePrice(List<Price> price)
+    
+    private void ConstructorPriceValidate(List<Price> prices)
     {
-        Prices.ForEach(ValidatePrice);
-        Prices = price;
+        foreach (var newPrice in prices)
+        {
+            ValidatePrice(newPrice);
+            Prices.Add(newPrice);
+        }
+        
     }
     
     private void ValidatePrice(Price newPrice)
     {
+        if(Prices.Count == 0)
+            return;
+        
         foreach (var existingPrice in Prices)
         {
-            if (newPrice.Day == existingPrice.Day ||
-                newPrice.Day == null || 
-                existingPrice.Day == null)
-                if (newPrice.TimeStart < existingPrice.TimeEnd && 
-                    newPrice.TimeEnd > existingPrice.TimeStart)
-                    throw new Exception("Price time slots overlap");
+
+            if (existingPrice.Id == newPrice.Id)
+                continue;
+            
+            bool hasCommonDay = newPrice.Days != null &&
+                                newPrice.Days.Intersect(existingPrice.Days).Any();
+
+            if (hasCommonDay)
+            {
+                bool overlaps = newPrice.TimeStart < existingPrice.TimeEnd && 
+                                newPrice.TimeEnd > existingPrice.TimeStart;
+
+                if (overlaps)
+                    throw new Exception("Price time slots overlap on the same day");
+            }
         }
     }
+    
+    public void RemoveCourtFromOrganization(Guid organizationId, Guid courtId) 
+        => RaiseDomainEvent(new RemoveCourtFromOrganizationDomainEvent(courtId, organizationId));
 }
