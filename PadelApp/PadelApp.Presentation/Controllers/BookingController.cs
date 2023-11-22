@@ -89,20 +89,20 @@ public class BookingController : ControllerBase
     }
     
     [Token(Role.Player)]
-    [HttpGet("user-pending/{id}")]
-    public async Task<IActionResult> GetUserPendingBookings(Guid id, CancellationToken cancellationToken)
+    [HttpGet("user-pending")]
+    public async Task<IActionResult> GetUserPendingBookings(CancellationToken cancellationToken)
     {
-        var command = new UserPendingBookingsCommand(id);
+        var command = new UserPendingBookingsCommand();
         
         var result = await _mediator.Send(command, cancellationToken);
         
         return Ok(result);
     }
     
-    [HttpGet("user-upcoming/{id}")]
-    public async Task<IActionResult> GetUserUpcomingBookings(Guid id, CancellationToken cancellationToken)
+    [HttpGet("user-upcoming")]
+    public async Task<IActionResult> GetUserUpcomingBookings(CancellationToken cancellationToken)
     {
-        var command = new UserUpcomingBookingsCommand(id);
+        var command = new UserUpcomingBookingsCommand();
         
         var result = await _mediator.Send(command, cancellationToken);
         

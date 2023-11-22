@@ -3,4 +3,4 @@ using MediatR;
 
 namespace PadelApp.Application.Queries.Booking.UserPendingBookings;
 
-public record UserPendingBookingsCommand(Guid Id) : IRequest<List<UserPendingBookingsResponse>?>;    
+public record UserPendingBookingsCommand() : IRequest<List<UserPendingBookingsResponse>?>;    
