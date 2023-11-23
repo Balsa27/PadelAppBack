@@ -183,7 +183,7 @@ builder.Services.AddQuartz(cfg =>
 builder.Services.AddQuartzHostedService();
 builder.Services.AddScoped<IJobFactory, QuartzJobFactory>();
 
-builder.Services.AddHostedService<BookingNotificationService>();
+//builder.Services.AddHostedService<BookingNotificationService>();
 
 builder.Services.AddScoped<IScheduler>(s =>
 {
