@@ -3072,11 +3072,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp\\PadelApp.csproj",
+      "projectUniqueName": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp\\PadelApp.csproj",
       "projectName": "PadelApp",
-      "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp\\PadelApp.csproj",
+      "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp\\PadelApp.csproj",
       "packagesPath": "C:\\Users\\balsa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp\\obj\\",
+      "outputPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3097,20 +3097,20 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Application\\PadelApp.Application.csproj": {
-              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Application\\PadelApp.Application.csproj"
+            "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Application\\PadelApp.Application.csproj": {
+              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Application\\PadelApp.Application.csproj"
             },
-            "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj": {
-              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj"
+            "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj": {
+              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj"
             },
-            "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Infrastructure\\PadelApp.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Infrastructure\\PadelApp.Infrastructure.csproj"
+            "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Infrastructure\\PadelApp.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Infrastructure\\PadelApp.Infrastructure.csproj"
             },
-            "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Persistance\\PadelApp.Persistance.csproj": {
-              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Persistance\\PadelApp.Persistance.csproj"
+            "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Persistance\\PadelApp.Persistance.csproj": {
+              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Persistance\\PadelApp.Persistance.csproj"
             },
-            "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Presentation\\PadelApp.Presentation.csproj": {
-              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Presentation\\PadelApp.Presentation.csproj"
+            "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Presentation\\PadelApp.Presentation.csproj": {
+              "projectPath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Presentation\\PadelApp.Presentation.csproj"
             }
           }
         }

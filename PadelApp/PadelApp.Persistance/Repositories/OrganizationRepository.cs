@@ -21,7 +21,7 @@ public class OrganizationRepository : IOrganizationRepository
         => await _dbContext.Organizations
             .FirstOrDefaultAsync(o =>
                 o.Username == username || 
-                o.Email == email ||
+                o.Email == email &&
                 o.IsActive == true);
 
     public void Remove(Organization organization) => _dbContext.Organizations.Remove(organization);
@@ -30,11 +30,4 @@ public class OrganizationRepository : IOrganizationRepository
     
     public async Task Add(Organization organization) => await _dbContext.Organizations.AddAsync(organization);
     
-
-    // public void RemoveCourt(Guid organizationId, Guid courtId)
-    // {
-    //     string sql = "DELETE FROM OrganizationCourt WHERE OrganizationId = {0} AND CourtId = {1}";
-    //     
-    //     _dbContext.Database.ExecuteSqlRaw(sql, organizationId, courtId);
-    // }
 }

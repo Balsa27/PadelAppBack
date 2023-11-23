@@ -51,8 +51,6 @@ public class Court : AggregateRoot
         ConstructorPriceValidate(prices);
         RaiseDomainEvent(new CourtCreatedDomainEvent(Id, OrganizationId));
     }
-
-   
     
     public Court(
         Guid courtId,
@@ -187,6 +185,8 @@ public class Court : AggregateRoot
     
     public void CreateBooking(Booking booking)
     {
+        booking.ValidateBooking(booking.StartTime, booking.EndTime);
+        
         if(!IsAvailable(booking.StartTime, booking.EndTime))
             throw new CourtNotAvailableException("Cannot add booking to court");
         
@@ -203,6 +203,21 @@ public class Court : AggregateRoot
         existingBooking.Confirm();
         
         RaiseDomainEvent(new BookingAcceptedDomainEvent(existingBooking.Id, bookerId));
+    }
+
+    public void CancelBooking(Booking booking)
+    {
+        if (booking.Status == BookingStatus.Cancelled)
+            throw new InvalidOperationException("Booking is already cancelled.");
+        
+        booking.ChangeBookingStatus(BookingStatus.Cancelled);
+
+        var nextBookerId = booking.WaitingList.GetNextUser();
+
+        if (nextBookerId.HasValue)
+        {
+            RaiseDomainEvent(new BookingCancelledDomainEvent(booking.Id, booking.WaitingList.UserIds));
+        }
     }
 
     public void RemovePrices()
@@ -230,11 +245,11 @@ public class Court : AggregateRoot
         existingBooking.RescheduleBooking(startTime, endTime);
     }
     
-    public void CancelBooking(Booking existingBooking)
-    {
-        existingBooking.Cancel();
-        Bookings.Remove(existingBooking);
-    }
+    // public void CancelBooking(Booking existingBooking)
+    // {
+    //     existingBooking.Cancel();
+    //     Bookings.Remove(existingBooking);
+    // }
 
     public void UpdateCourtStatus(CourtStatus status)
     {

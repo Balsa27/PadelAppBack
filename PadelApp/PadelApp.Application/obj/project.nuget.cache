@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mwBXKqsEHSDihjT5w3Uh4WlSDKv7IeG0d1BMk53AW/ibjrScpCKZarpgEmav5z3dSdrBnEe25h4/VsV3Py36WQ==",
+  "dgSpecHash": "ey6TKl61slQzPaoj75A70luRh43BbpUONCYAc7wXlXPrmHzOiML3lI5zT0J3pWHVABtHCOShQuo52XB8voYB9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PaddelAppBack\\PadelApp\\PadelApp.Application\\PadelApp.Application.csproj",
+  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Application\\PadelApp.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\balsa\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\balsa\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",

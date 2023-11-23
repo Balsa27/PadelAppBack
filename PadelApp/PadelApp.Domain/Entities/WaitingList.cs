@@ -4,55 +4,35 @@
 
     public class WaitingList : Entity
     {
-        private readonly List<Guid> _userIds = new();
-        public Guid? CurrentUserId { get; private set; }
+        public List<Guid> UserIds { get; private set; } = new();
 
         public WaitingList()
         {
             
         }
         
-        public void NotifyNextUser()
+        public WaitingList( List<Guid> userIds)
         {
-            CurrentUserId = GetNextUser();
-
-            if (CurrentUserId.HasValue)
-            {
-                //todo: raise an event to notify the user
-            }
-        }
-
-        public void Accept(Guid userId)
-        {
-            if (!CurrentUserId.HasValue || 
-                CurrentUserId.Value != userId)
-                throw new InvalidOperationException("This user cannot accept the waiting list at this time.");
-            
-            //todo: raise an event to notify the user
-            _userIds.Remove(userId);
-            CurrentUserId = null;
-        }
-
-        public void Reject(Guid userId)
-        {
-            if (!CurrentUserId.HasValue || CurrentUserId.Value != userId)
-            {
-                throw new InvalidOperationException("This user cannot reject the waiting list at this time.");
-            }
-            
-            _userIds.Remove(userId);
-            CurrentUserId = null;
+            UserIds = userIds;
         }
 
         public void AddToWaitingList(Guid userId)
         {
-            if(!_userIds.Contains(userId))
+            if(!UserIds.Contains(userId))
                 throw new InvalidOperationException("User is already in the waiting list");
             
-            _userIds.Add(userId);
+            UserIds.Add(userId);
         }
         
-        public bool IsEmpty() => !_userIds.Any(); 
+        public void RemoveFromWaitingList(Guid userId)
+        {
+            if(!UserIds.Contains(userId))
+                throw new InvalidOperationException("User is not in the waiting list");
+            
+            UserIds.Remove(userId);
+        }
         
-        private Guid? GetNextUser() => _userIds.FirstOrDefault();
+        public bool IsEmpty() => !UserIds.Any(); 
+        
+        public Guid? GetNextUser() => UserIds.FirstOrDefault();
     }

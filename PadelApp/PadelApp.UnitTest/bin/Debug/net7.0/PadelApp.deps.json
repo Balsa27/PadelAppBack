@@ -667,6 +667,7 @@
           "BCrypt.Net-Next": "4.0.3",
           "MediatR": "12.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.10",
+          "Microsoft.EntityFrameworkCore": "7.0.10",
           "PadelApp.Domain": "1.0.0",
           "Quartz": "3.7.0"
         },

@@ -27,6 +27,7 @@ public class PriceEntityTypeConfiguration : IEntityTypeConfiguration<Price>
             .HasColumnName("DaysOfWeek");
 
         builder.Property<Guid>("CourtId");
+        //builder.Property("CourtId").ValueGeneratedOnAdd();
         builder.HasOne<Court>().WithMany(c => c.Prices).HasForeignKey("CourtId");
     }
 }

@@ -90,4 +90,20 @@ public class BookingRepository : IBookingRepository
 
         return bookings.Count == 0 ? null : bookings;
     }
+
+    public async Task<List<Booking>?> GetBookingsToCheck()
+    {
+        return await _dbContext.Courts
+            .SelectMany(c => c.Bookings)
+            .Where(b => DateTime.Now >= b.StartTime &&
+                        b.Status == BookingStatus.Cancelled && 
+                        b.WaitingList.UserIds
+                .Any())
+            .ToListAsync();
+    }
+
+    public void UpdateBooking(Booking booking)
+    {
+        throw new NotImplementedException();
+    }
 }

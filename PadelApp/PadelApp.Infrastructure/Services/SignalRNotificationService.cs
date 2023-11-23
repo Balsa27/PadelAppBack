@@ -25,4 +25,20 @@ public class SignalRNotificationService : INotificationService
             await _hubContext.Clients.Client(connectionId).SendAsync("ReceiveMessage", message);
         }
     }
+    public async Task NotifyUserForBookingAcceptance(Guid userId, Guid bookingId)
+    {
+        var connectionId = NotificationHub._users.FirstOrDefault(u => u.Value == userId.ToString()).Key;
+
+        if (!string.IsNullOrEmpty(connectionId))
+        {
+            var message = new
+            {
+                Action = "BookingOffer",
+                BookingId = bookingId,
+                Message = "A booking slot is available. Do you want to accept it?"
+            };
+
+            await _hubContext.Clients.Client(connectionId).SendAsync("ReceiveMessage", message);
+        }
+    }
 }

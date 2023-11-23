@@ -10,11 +10,29 @@ public class Booking : Entity
     public Guid CourtId { get; private set; }
     //public string CourtName { get; private set; }
     //public List<BookingAttendee> Attendees { get; private set; } = new ();
-    //public WaitingList WaitingList { get; private set; } = new();
+    public WaitingList WaitingList { get; private set; } = new();
     public Guid BookerId { get; private set; }
     public BookingStatus Status { get; private set; }
     public DateTime StartTime { get; private set; }
     public DateTime EndTime { get; private set; }
+    
+    
+    public Booking(
+        Guid id,
+        Guid courtId,
+        Guid bookerId,
+        DateTime startTime,
+        DateTime endTime,
+        BookingStatus status)
+    {
+        //ValidateBooking(startTime, endTime);
+        Id = id;
+        CourtId = courtId;
+        BookerId = bookerId;
+        StartTime = startTime;
+        EndTime = endTime;
+        Status = status;
+    }
     
     public Booking(
         Guid courtId,
@@ -22,7 +40,7 @@ public class Booking : Entity
         DateTime startTime,
         DateTime endTime)
     {
-        ValidateBooking(startTime, endTime);
+        //ValidateBooking(startTime, endTime);
        
         CourtId = courtId;
         BookerId = bookerId;
@@ -31,21 +49,7 @@ public class Booking : Entity
         Status = BookingStatus.Pending;
     }
     
-    public Booking(
-        Guid courtId,
-        string courtName,
-        Guid bookerId,
-        DateTime startTime,
-        DateTime endTime)
-    {
-        CourtId = courtId;
-        BookerId = bookerId;
-        StartTime = startTime;
-        EndTime = endTime;
-        Status = BookingStatus.Pending;
-    }
-    
-    // public void AddAttendee(Guid playerId)
+    // public    void AddAttendee(Guid playerId)
     // {
     //     if (Attendees.Any(a => a.PlayerId == playerId))
     //         throw new InvalidOperationException("User is already attending the booking");
@@ -77,8 +81,6 @@ public class Booking : Entity
             throw new InvalidOperationException("Booking is already cancelled.");
         
         Status = BookingStatus.Cancelled;
-        
-        //WaitingList.NotifyNextUser();
     }
     
     public void RescheduleBooking(DateTime startTime, DateTime endTime) 
@@ -101,14 +103,19 @@ public class Booking : Entity
         // WaitingList.NotifyNextUser();
     }
 
+    public void ChangeBookingStatus(BookingStatus status)
+    {
+        Status = status;
+    }
+
     public bool IsOverlapping(DateTime start, DateTime end) => StartTime < end && start < EndTime && Status == BookingStatus.Confirmed;
     
-    private void ValidateBooking(DateTime startTime, DateTime endTime)
+    public void ValidateBooking(DateTime startTime, DateTime endTime)
     {
         if (startTime == endTime)
             throw new ArgumentException("Start time cannot be the same as end time");
         if (startTime < DateTime.Now)
-            throw new ArgumentException("Start time cannot be in the past");
+                throw new ArgumentException("Start time cannot be in the past");
         if (startTime > endTime)
             throw new ArgumentException("Start time cannot be after end time");
     }

@@ -52,6 +52,7 @@ using PadelApp.Domain.Events.DomainEvents;
 using PadelApp.Domain.Events.DomainEvents.DomainEventConverter;
 using PadelApp.Infrastructure.Authentication.Google;
 using PadelApp.Infrastructure.BackroundJobs;
+using PadelApp.Infrastructure.BookingBackroundService;
 using PadelApp.Infrastructure.Email;
 using PadelApp.Infrastructure.SignalR;
 using PadelApp.Middleware;
@@ -114,7 +115,7 @@ builder.Services.AddScoped<INotificationHandler<BookingCreatedDomainEvent>, Book
 //Auth
 builder.Services.AddScoped<IRequestHandler<GoogleSignInCommand, Result<GoogleSignInResponse>>, GoogleSignInRequestHandler>();
 builder.Services.AddScoped<IRequestHandler<AppleSignInCommand, Result<AppleSignInResponse>>, AppleSignInRequestHandler>();
-builder.Services.AddScoped<IRequestHandler<UserLoginCommand, Result<string>>, UserLoginRequestHandler>();
+builder.Services.AddScoped<IRequestHandler<UserLoginCommand, UserLoginResponse>, UserLoginRequestHandler>();
 builder.Services.AddScoped<IRequestHandler<PlayerRegisterCommand, Result<string>>, PlayerRegisterRequestHandler>();
 builder.Services.AddScoped<IRequestHandler<OrganizationRegisterCommand, OrganizationRegisterResponse>, OrganizationRegisterRequestHandler>();
 
@@ -181,6 +182,8 @@ builder.Services.AddQuartz(cfg =>
 
 builder.Services.AddQuartzHostedService();
 builder.Services.AddScoped<IJobFactory, QuartzJobFactory>();
+
+builder.Services.AddHostedService<BookingNotificationService>();
 
 builder.Services.AddScoped<IScheduler>(s =>
 {

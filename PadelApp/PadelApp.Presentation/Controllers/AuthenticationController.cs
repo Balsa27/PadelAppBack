@@ -47,10 +47,7 @@ public class AuthenticationController : ControllerBase
         
         var result = await _mediator.Send(command, cancellationToken);
 
-        if (result.IsFailure)
-            return BadRequest(new { Error = result.Error.Message });
-        
-        return Ok(new { Token = result.Value });
+        return Ok(result);
     }
 
     [HttpPost("google-signin")]
