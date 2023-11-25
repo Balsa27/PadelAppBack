@@ -11,8 +11,8 @@ using PadelApp.Persistance.EFC;
 namespace PadelApp.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231120173728_Booking")]
-    partial class Booking
+    [Migration("20231125162827_RemoveWaitingList")]
+    partial class RemoveWaitingList
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

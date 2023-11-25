@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PadelApp.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class Booking : Migration
+    public partial class RemoveWaitingList : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

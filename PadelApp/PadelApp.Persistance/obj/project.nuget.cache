@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DvioAdVmFHiOervOJloJeC+La1l/53tmDxE4Ejily8I/OuBLZy1w9ETMIrUL4YtUk/ZTvbsIMHeztNGTByPdoQ==",
+  "dgSpecHash": "U2eF8Od4tusz/aDScxWKaj3iMxl1J+5pORs+ZC50cgpywSUb9j+Ur0Iw+LCw6Xn2iJeIgIAfRPlcLIyDi1255w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Persistance\\PadelApp.Persistance.csproj",
+  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PadelApp\\PadelAppBack\\PadelApp\\PadelApp.Persistance\\PadelApp.Persistance.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\balsa\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\balsa\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
