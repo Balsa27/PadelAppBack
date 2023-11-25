@@ -10,7 +10,7 @@ public class Booking : Entity
     public Guid CourtId { get; private set; }
     //public string CourtName { get; private set; }
     //public List<BookingAttendee> Attendees { get; private set; } = new ();
-    public WaitingList WaitingList { get; private set; } = new();
+    //public WaitingList WaitingList { get; private set; } = new();
     public Guid BookerId { get; private set; }
     public BookingStatus Status { get; private set; }
     public DateTime StartTime { get; private set; }
@@ -108,7 +108,7 @@ public class Booking : Entity
         Status = status;
     }
 
-    public bool IsOverlapping(DateTime start, DateTime end) => StartTime < end && start < EndTime && Status == BookingStatus.Confirmed;
+    public bool IsOverlapping(DateTime start, DateTime end) => StartTime < end && start < EndTime || Status == BookingStatus.Confirmed;
     
     public void ValidateBooking(DateTime startTime, DateTime endTime)
     {

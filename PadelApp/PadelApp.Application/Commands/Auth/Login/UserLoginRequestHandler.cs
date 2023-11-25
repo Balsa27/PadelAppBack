@@ -41,7 +41,7 @@ public class UserLoginRequestHandler : IRequestHandler<UserLoginCommand, UserLog
 
             var token = _jwtProvider.GeneratePlayerToken(user);
             
-            return new UserLoginResponse(token, user.Role);
+            return new UserLoginResponse(token, user.Id, user.Role);
         }
         
         var organization = await _organizationRepository
@@ -56,7 +56,7 @@ public class UserLoginRequestHandler : IRequestHandler<UserLoginCommand, UserLog
 
             var token = _jwtProvider.GenerateOrganizationToken(organization);
                 
-            return new UserLoginResponse(token, organization.Role);
+            return new UserLoginResponse(token, organization.Id, organization.Role);
         }
         
         throw new AuthenticationException("Invalid credentials.");

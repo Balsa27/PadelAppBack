@@ -7,7 +7,6 @@ public record OrganizationRegisterResponse(
     Guid OrganizationId, 
     string Username,
     string Email,
-    string Password,
     string Name,
     string Description,
     Address Address,
@@ -15,4 +14,5 @@ public record OrganizationRegisterResponse(
     TimeSpan Start,
     TimeSpan End,
     OrganizationStatus Status,
+    Role Role,
     string Token);

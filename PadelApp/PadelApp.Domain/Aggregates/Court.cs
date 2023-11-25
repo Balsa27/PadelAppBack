@@ -211,13 +211,14 @@ public class Court : AggregateRoot
             throw new InvalidOperationException("Booking is already cancelled.");
         
         booking.ChangeBookingStatus(BookingStatus.Cancelled);
+        
+        //RaiseDomainEvent(new BookingCancelledDomainEvent(booking.Id, booking.BookerId));
 
-        var nextBookerId = booking.WaitingList.GetNextUser();
-
-        if (nextBookerId.HasValue)
-        {
-            RaiseDomainEvent(new BookingCancelledDomainEvent(booking.Id, booking.WaitingList.UserIds));
-        }
+        // var nextBookerId = booking.WaitingList.GetNextUser();
+        //
+        // if (nextBookerId.HasValue)
+        // {
+        // }
     }
 
     public void RemovePrices()

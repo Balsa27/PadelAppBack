@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4HZuqvpLuyGxG1qVKBUEUrUvKuVRzLzZNphKh6HN4GqQSEolUAh2loniI2HX8/i9KNc4fdBfw8cONAxIa+g7kQ==",
+  "dgSpecHash": "vvT2wRWKEPi7tHPn2mE9+qrswPTTnodS/I5Tv5YbcYX5IhiGmh4PsqRVPrexhp2oOT9jK2wZsE7q2Zf6i/mMmw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Infrastructure\\PadelApp.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PadelApp\\PadelAppBack\\PadelApp\\PadelApp.Infrastructure\\PadelApp.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\balsa\\.nuget\\packages\\aspnet.security.oauth.apple\\7.0.4\\aspnet.security.oauth.apple.7.0.4.nupkg.sha512",
     "C:\\Users\\balsa\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

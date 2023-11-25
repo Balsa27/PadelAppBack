@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ls8w6G6oYWxIF2F7r/ReBCcRD5Ny57e3MFsr5hJvWH8boUfYxSgH3i5cXdr5tGJEeI5VC2Craib3mqEucB29rA==",
+  "dgSpecHash": "KL6/VhoG0FVrBOnz5vXW06rAeNn39KPZjXpPLAiz9K5wlDA6o9nulIW5wLewkEZONYBT5kZjODVUg42wbx2Rxg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\NewPadel\\PadelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj",
+  "projectFilePath": "C:\\Users\\balsa\\OneDrive\\Radna površina\\PadelApp\\PadelAppBack\\PadelApp\\PadelApp.Domain\\PadelApp.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\balsa\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\balsa\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",

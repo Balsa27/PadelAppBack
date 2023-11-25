@@ -15,10 +15,6 @@ public class BookingCancelledDomainEventHandler : INotificationHandler<BookingCa
 
     public async Task Handle(BookingCancelledDomainEvent notification, CancellationToken cancellationToken)
     {
-        var nextUserId = notification.WaitingList.FirstOrDefault();
-        if (nextUserId != default)
-        {
-            await _notificationService.NotifyUserForBookingAcceptance(nextUserId, notification.BookingId);
-        }
+        //await _notificationService.NotifyUserAsync(notification.BookerId, "Your booking has been cancelled!");
     }
 }

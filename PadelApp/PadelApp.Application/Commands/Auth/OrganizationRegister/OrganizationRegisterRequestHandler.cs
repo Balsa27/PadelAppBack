@@ -53,7 +53,6 @@ public class OrganizationRegisterRequestHandler : IRequestHandler<OrganizationRe
             organization.Id,
             request.Username,
             request.Email,
-            hashedPassword,
             request.Name,
             request.Description,
             request.Address,
@@ -61,6 +60,7 @@ public class OrganizationRegisterRequestHandler : IRequestHandler<OrganizationRe
             request.Start,
             request.End,
             organization.Status,
+            organization.Role,
             token);
     }
 }
